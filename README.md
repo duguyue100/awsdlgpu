@@ -14,17 +14,15 @@ Find the description [here](../master/aws_for_dl.md).
 
 + Clean current AMI for saving space
 + Prepare DGYDLGPUv3
+   + Prepare installation script for the server [Design for Ubuntu 14.04]
+   + Prepare another version with remote desktop
+   + Web access for submitting gpu scripts
 
 ## Contacts
 
-Hu Yuhuang
-
-Advanced Robotic Lab
-
-Department of Artificial Intelligence
-
-Faculty of Computer Science & IT
-
-University of Malaya
-
+Hu Yuhuang  
+Advanced Robotic Lab  
+Department of Artificial Intelligence  
+Faculty of Computer Science & IT  
+University of Malaya  
 Email: duguyue100@gmail.com

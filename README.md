@@ -31,12 +31,12 @@ Find the description [here](../master/aws_for_dl.md).
    4. In you terminal, execute
    
       ```
-      sudo grub-set-default "Ubuntu, with Linux 3.13.0-37-generic"
+      $ sudo grub-set-default "Ubuntu, with Linux 3.13.0-37-generic"
       ```
    5. And execute
    
       ```
-      sudo update-grub
+      $ sudo update-grub
       ```
    6. However, this will not actually update your boot kernel becaue `"Ubuntu, with Linux 3.13.0-37-generic"` is acutally old title. `update-grub` actually will give you the correct title for the choice. So re-execute `grub-set-default` again with correct title and then execute `update-grub`.
    7. Now reboot your machine, you should be able to boot your machine from old kernel version.

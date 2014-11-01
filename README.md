@@ -9,14 +9,21 @@ Find the description [here](../master/aws_for_dl.md).
 
 + Setup guide is uploaded [2014-10-15]
 + DGYDLGPUv2 is up, you can search this AMI from public images. [2014-10-15]
++ Added experimental setup script for seting up environment. [2014-11-01]
 
 ## Todo
 
 + Clean current AMI for saving space
 + Prepare DGYDLGPUv3
-   + Prepare installation script for the server [Design for Ubuntu 14.04]
    + Prepare another version with remote desktop
    + Web access for submitting gpu scripts
+
+## Maintenance Schedule
+
++ Next check: 2014-11-16
+   + New build of public image.
+   + Setup script check.
+   + Installation guide check.
 
 ## Notes
 

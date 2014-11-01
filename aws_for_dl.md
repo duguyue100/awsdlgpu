@@ -119,7 +119,7 @@ $ wget http://us.download.nvidia.com/XFree86/Linux-x86_64/340.46/NVIDIA-Linux-x8
 And execute following lines to disable `nouveau`
 
 ```
-$ cd /etc/modprob.d
+$ cd /etc/modprobe.d
 $ sudo nano blacklist.conf
 ```  
 Add a line at the end of `blacklist.conf`
@@ -147,6 +147,12 @@ You need to get recent CUDA Toolkit in order to use your GPU:
 ```
 $ wget http://developer.download.nvidia.com/compute/cuda/6_5/rel/installers/cuda_6.5.14_linux_64.run
 ```
+
+And install CUDA by:
+```
+$ sudo sh cuda_6.5.14_linux64.run
+```
+
 **DO NOT INSTALL GPU DRIVER INSIDE THE CUDA TOOLKIT**
 
 Add following line to end of your `.bashrc` file.
@@ -263,14 +269,9 @@ Search **DGYDLGPUv2** from public AMIs.
 
 ## Contacts
 
-Hu Yuhuang
-
-Advanced Robotic Lab
-
-Department of Artificial Intelligence
-
-Faculty of Computer Science & IT
-
-University of Malaya
-
+Hu Yuhuang  
+Advanced Robotic Lab  
+Department of Artificial Intelligence  
+Faculty of Computer Science & IT  
+University of Malaya  
 Email: duguyue100@gmail.com

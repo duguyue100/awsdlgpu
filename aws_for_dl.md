@@ -1,5 +1,7 @@
 # Setup An Amazon EC2 GPU Instance for Deep Learning
 
+__Last updated: 2014-11-29__
+
 ## From scratch
 
 ### Create EC2 GPU Instance
@@ -8,7 +10,7 @@ After you registered at AWS (Amazon Web Services), you should be able to create 
 
 Choose `Launch`, then select `Ubuntu Server 14.04 LTS (HVM), SSD Volume Type`, then choose `g2.2xlarge` instance type.
 
-The initial storage on the instance settings is 8GB, but it's far from enough. I personally pushed to 60GB so that I can have enough room for installing packages, drivers, databases, etc.
+The initial storage on the instance settings is 8GB, but it's far from enough. I personally pushed to 200GB so that I can have enough room for installing packages, drivers, databases, etc.
 
 ### Install packages.
 
@@ -29,10 +31,12 @@ $ sudo apt-get install linux-headers-generic linux-headers-virtual linux-image-v
 $ sudo apt-get install linux-image-extra-virtual
 ```
 
+__Reboot your instance by stopping and starting it.__
+
 Then, you need to install `build-essential` to enable your development support:
 
 ```
-$ sudo apt-get install build-essential gcc g++ make binutils linux-headers-`uname -r`
+$ sudo apt-get install build-essential binutils
 ```
 
 Some supporting libraries needed for getting and building your project later:
@@ -54,6 +58,8 @@ You may also need Java support for some cases:
 ```
 $ sudo apt-get install openjdk-7-jdk
 ```
+
+__Reboot your instance by stopping and starting it.__
 
 ### Scientific Python Support from Anaconda
 
@@ -113,7 +119,7 @@ Nvidia Grid K520 is a Cloud Gaming Graphic Card, it got 2 GK104 GPUs where each 
 You need to download the driver for Grid K520 firstly from [here](http://www.nvidia.com/Download/index.aspx?lang=en-us). You also can use this address to download:
 
 ```
-$ wget http://us.download.nvidia.com/XFree86/Linux-x86_64/340.46/NVIDIA-Linux-x86_64-340.46.run
+$ wget http://us.download.nvidia.com/XFree86/Linux-x86_64/340.58/NVIDIA-Linux-x86_64-340.58.run
 ```
 
 And execute following lines to disable `nouveau`
@@ -136,6 +142,9 @@ Then
 ```
 $ sudo update-initramfs -u
 ```
+
+__Reboot your instance by stopping and starting it.__
+
 Then you can simply install the driver by:
 
 ```

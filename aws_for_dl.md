@@ -1,6 +1,6 @@
 # Setup An Amazon EC2 GPU Instance for Deep Learning
 
-__Last updated: 2014-11-29__
+__Last updated: 2014-12-11__
 
 ## From scratch
 
@@ -119,25 +119,15 @@ Nvidia Grid K520 is a Cloud Gaming Graphic Card, it got 2 GK104 GPUs where each 
 You need to download the driver for Grid K520 firstly from [here](http://www.nvidia.com/Download/index.aspx?lang=en-us). You also can use this address to download:
 
 ```
-$ wget http://us.download.nvidia.com/XFree86/Linux-x86_64/340.58/NVIDIA-Linux-x86_64-340.58.run
+$ wget http://us.download.nvidia.com/XFree86/Linux-x86_64/340.65/NVIDIA-Linux-x86_64-340.65.run
 ```
 
-And execute following lines to disable `nouveau`
+Try to install the driver now by
 
 ```
-$ cd /etc/modprobe.d
-$ sudo nano blacklist.conf
+sudo bash NVIDIA-Linux-x86_64-340.65.run
 ```  
-Add a line at the end of `blacklist.conf`
-
-```
-blacklist vga16fb
-blacklist nouveau
-blacklist rivafb
-blacklist nvidiafb
-blacklist rivatv
-```
-Then
+You will not be able to install it because `nouveau` of the system is still on. The installer will add a blacklist to `nouveau` and quit. After the installer quited, you need to update your system by:
 
 ```
 $ sudo update-initramfs -u
@@ -148,7 +138,7 @@ __Reboot your instance by stopping and starting it.__
 Then you can simply install the driver by:
 
 ```
-$ sudo bash ./XXX.sh
+$ sudo bash NVIDIA-Linux-x86_64-340.65.run
 ```
 
 You need to get recent CUDA Toolkit in order to use your GPU:
@@ -159,7 +149,7 @@ $ wget http://developer.download.nvidia.com/compute/cuda/6_5/rel/installers/cuda
 
 And install CUDA by:
 ```
-$ sudo sh cuda_6.5.14_linux64.run
+$ sudo bash cuda_6.5.14_linux64.run
 ```
 
 **DO NOT INSTALL GPU DRIVER INSIDE THE CUDA TOOLKIT**
@@ -196,7 +186,7 @@ root = /usr/local/cuda
 
 You can use [this test](http://deeplearning.net/software/theano/tutorial/using_gpu.html#testing-theano-with-gpu) to valid your installation.
 
-### Caffe support
+### Caffe support [UNDER REVISION]
 
 Caffe recently supports Nvidia's new machine learning library --- cuDNN. It improves Caffe's performance. Note that cuDNN requires that the graphic card has at least 3.0 of compute capability. Graphic card of this instance is 3.0.
 
@@ -274,7 +264,7 @@ I made a ready-to-use AMI so that you don't have to be so painful for these tech
 
 I made this AMI public so that you can use it to launch a new instance or make a spot request.
 
-Search **DGYDLGPUv2** from public AMIs.
+Search **DGYDLGPUv3** (ami-c5c2ee97) from public AMIs.
 
 ## Contacts
 

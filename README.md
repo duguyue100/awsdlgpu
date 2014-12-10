@@ -5,24 +5,32 @@ A description for setting up an Amazon EC2 GPU instance for Deep Learning.
 
 Find the description [here](../master/aws_for_dl.md).
 
+Current information of the image:
+
+```
+Linux Kernel: 3.13.0-40-generic
+GPU Driver: 340.65
+CUDA Toolkit: 6.5
+```
+
 ## Updates
 
 + Setup guide is uploaded [2014-10-15]
 + DGYDLGPUv2 is up, you can search this AMI from public images. [2014-10-15]
 + Added experimental setup script for seting up environment. [2014-11-01]
++ DGYDLGPUv3 is ready. [2014-12-11]
 
 ## Todo
 
-+ Clean current AMI for saving space
++ Clean current AMI for saving space [DONE]
 + Prepare DGYDLGPUv3
    + Prepare another version with remote desktop
    + Web access for submitting gpu scripts
 
 ## Maintenance Schedule
 
-+ Next check: 2014-11-16
++ Next check: 2014-12-20
    + New build of public image.
-   + Setup script check.
    + Installation guide check.
 
 ## Notes

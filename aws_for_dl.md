@@ -131,6 +131,13 @@ $ wget http://us.download.nvidia.com/XFree86/Linux-x86_64/346.59/NVIDIA-Linux-x8
 You will not be able to install it because `nouveau` of the system is still on. The installer will add a blacklist to `nouveau` and quit. After the installer quited, you need to update your system by:
 
 ~~~
+$ cd /etc/modprobe.d/
+$ sudo nano blacklist.conf
+~~~
+
+Add `blacklist nouveau` at the end of `blacklist.conf`.
+
+~~~
 $ sudo update-initramfs -u
 ~~~
 

@@ -275,11 +275,12 @@ You should have 2 Disabled tests, the reason is from OpenCV part.
 
 ## From AMI (Amazon Machine Image)
 
-I made a ready-to-use AMI so that you don't have to be so painful for these technical details.
+I made two ready-to-use AMIs so that you don't have to be so painful for these technical details.
 
 I made this AMI public so that you can use it to launch a new instance or make a spot request.
 
-Search **DGYDLGPUv3** (ami-c5c2ee97) from public AMIs.
++ __DGYDLGPUv4__ (ami-ba516ee8) [Based on g2.2xlarge]
++ __DGYDLGPUXv1__ (ami-52516e00) [Based on g2.8xlarge]
 
 ## Contacts
 

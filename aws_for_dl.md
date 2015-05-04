@@ -188,8 +188,8 @@ $ tar zxvf cudnn-6.5-linux-x64-v2.tgz
 Copy extracted files to CUDA folder
 
 ~~~
-$ sudo cp cudnn.h /usr/local/cuda-6.5/include
-$ sudo cp libcudnn* /usr/local/cuda-6.5/lib64
+$ sudo cp cudnn.h /usr/local/cuda-7.0/include
+$ sudo cp libcudnn* /usr/local/cuda-7.0/lib64
 ~~~
 
 ### Theano support

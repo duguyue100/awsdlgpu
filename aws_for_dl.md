@@ -1,6 +1,6 @@
 # Setup An Amazon EC2 GPU Instance for Deep Learning
 
-__Last updated: 2014-12-11__
+__Last updated: 2015-05-04__
 
 ## From scratch
 
@@ -10,7 +10,9 @@ After you registered at AWS (Amazon Web Services), you should be able to create 
 
 Choose `Launch`, then select `Ubuntu Server 14.04 LTS (HVM), SSD Volume Type`, then choose `g2.2xlarge` instance type.
 
-The initial storage on the instance settings is 8GB, but it's far from enough. I personally pushed to 200GB so that I can have enough room for installing packages, drivers, databases, etc.
+The initial storage on the instance settings is 8GB, but it's far from enough. I personally pushed to 500GB so that I can have enough room for installing packages, drivers, databases, etc.
+
+Amazon AWS now is offering another type of GPU instance, and it's a lot more powerful, it's `g2.8xlarge`. You can get much more detailed information from [here](http://aws.amazon.com/ec2/instance-types/).
 
 ### Install packages.
 
@@ -18,46 +20,46 @@ You got a brand new Ubuntu machine after your instance is running successfully.
 
 Home folder of the instance is empty, for further usage, we can create a `Downloads` folder to store all downloads
 
-```
+~~~
 $ mkdir Downloads
-```
+~~~
 
 Firstly, you need to update your update library by:
 
-```
+~~~
 $ sudo apt-get update
 $ sudo apt-get upgrade
 $ sudo apt-get install linux-headers-generic linux-headers-virtual linux-image-virtual linux-virtual
 $ sudo apt-get install linux-image-extra-virtual
-```
+~~~
 
 __Reboot your instance by stopping and starting it.__
 
 Then, you need to install `build-essential` to enable your development support:
 
-```
+~~~
 $ sudo apt-get install build-essential binutils
-```
+~~~
 
 Some supporting libraries needed for getting and building your project later:
 
-```
+~~~
 $ sudo apt-get install git cmake
-```
+~~~
 
 Theano and Caffe are two popular deep learning framework. In this instance, we are going to support them. You need to install following packages:
 
-```
+~~~
 $ sudo apt-get install libopenblas-dev libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libboost-all-dev libhdf5-serial-dev libgflags-dev libgoogle-glog-dev liblmdb-dev protobuf-compiler
-```
+~~~
 
 Your BLAS in this case is openBLAS.
 
 You may also need Java support for some cases:
 
-```
+~~~
 $ sudo apt-get install openjdk-7-jdk
-```
+~~~
 
 __Reboot your instance by stopping and starting it.__
 
@@ -65,114 +67,141 @@ __Reboot your instance by stopping and starting it.__
 
 Anaconda is an awesome Python distribution for large-scale data processing, predictive analysis, and scientific computing. It contains many well-known packages and maintained it well. Therefore, instead of messing with Ubuntu's Python, we use Anaconda's Python. Anaconda provides a clean installation, and once you don't need it, you can simply delete it from home folder.
 
-First, get Anaconda (use Anaconda Python 2.7) (Note that as I'm writing, latest Anaconda is 2.1.0, you can download the latest version from [here](http://continuum.io/downloads) also):
+First, get Anaconda (use Anaconda Python 2.7) (Note that as I'm writing, latest Anaconda is 2.2.0, you can download the latest version from [here](http://continuum.io/downloads) also):
 
-```
+~~~
 $ cd Downloads
-$ wget http://09c8d0b2229f813c1b93-c95ac804525aac4b6dba79b00b39d1d3.r79.cf1.rackcdn.com/Anaconda-2.1.0-Linux-x86_64.sh
-```
+$ wget https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda-2.2.0-Linux-x86_64.sh
+~~~
 
 After download, you simply run the bash file:
 
-```
-$ bash ./Anaconda-2.1.0-Linux-x86_64.sh
-```
+~~~
+$ bash ./Anaconda-2.2.0-Linux-x86_64.sh
+~~~
 
 Follow the default instruction, you should be able to find a new folder: `anaconda` in your home folder. Now if you check you Python's version, it should give you:
 
-```
-Python 2.7.8 :: Anaconda 2.1.0 (64-bit)
-```
+~~~
+Python 2.7.9 :: Anaconda 2.2.0 (64-bit)
+~~~
 
 Otherwise, you need to add Anaconda's path to your `.bashrc`
 
-```
+~~~
 $ nano ~/.bashrc
-```
+~~~
+
 Add following line to the end of the file
 
-```
+~~~
 export PATH="/home/ubuntu/anaconda/bin:$PATH"
-```
+~~~
+
 Press `Ctrl+X` to save and exit, then you need to source the file to enable current setting:
 
-```
+~~~
 $ source ~/.bashrc
-```
+~~~
 
 ### GPU Driver and CUDA Support
 
+#### Install GPU Driver
+
 Check your instance's graphic card by:
 
-```
-$  lspci | grep "VGA"
-```
+~~~
+$ lspci | grep -i nvidia
+~~~
+
 It should give you something similar to this:
 
 ```
-00:02.0 VGA compatible controller: Cirrus Logic GD 5446
 00:03.0 VGA compatible controller: NVIDIA Corporation GK104GL [GRID K520] (rev a1)
 ```
 
-Nvidia Grid K520 is a Cloud Gaming Graphic Card, it got 2 GK104 GPUs where each of GPU has 1536 CUDA cores. The compute capability is 3.0, so you can install latest cuDNN support.
+Nvidia Grid K520 is a Cloud Gaming Graphic Card, it got 2 GK104 GPUs where each of GPU has 1536 CUDA cores. The compute capability is 3.0, so you can install latest cuDNN support. If you are using `g2.8xlarge`, then you will get 4 GPUs on board.
 
 You need to download the driver for Grid K520 firstly from [here](http://www.nvidia.com/Download/index.aspx?lang=en-us). You also can use this address to download:
 
-```
-$ wget http://us.download.nvidia.com/XFree86/Linux-x86_64/340.65/NVIDIA-Linux-x86_64-340.65.run
-```
+~~~
+$ wget http://us.download.nvidia.com/XFree86/Linux-x86_64/346.59/NVIDIA-Linux-x86_64-346.59.run
+~~~
 
 Try to install the driver now by
 
-```
-sudo bash NVIDIA-Linux-x86_64-340.65.run
-```  
+~~~
+$ sudo bash NVIDIA-Linux-x86_64-346.59.run
+~~~
+
 You will not be able to install it because `nouveau` of the system is still on. The installer will add a blacklist to `nouveau` and quit. After the installer quited, you need to update your system by:
 
-```
+~~~
 $ sudo update-initramfs -u
-```
+~~~
 
 __Reboot your instance by stopping and starting it.__
 
 Then you can simply install the driver by:
 
-```
+~~~
 $ sudo bash NVIDIA-Linux-x86_64-340.65.run
-```
+~~~
+
+#### Install CUDA Toolkit
 
 You need to get recent CUDA Toolkit in order to use your GPU:
 
-```
-$ wget http://developer.download.nvidia.com/compute/cuda/6_5/rel/installers/cuda_6.5.14_linux_64.run
-```
+~~~
+$ wget http://developer.download.nvidia.com/compute/cuda/7_0/Prod/local_installers/cuda_7.0.28_linux.run
+~~~
+
+This will take a while, you may want to grab a coffee.
 
 And install CUDA by:
-```
-$ sudo bash cuda_6.5.14_linux64.run
-```
+~~~
+$ sudo bash cuda_7.0.28_linux64.run
+~~~
 
 **DO NOT INSTALL GPU DRIVER INSIDE THE CUDA TOOLKIT**
 
 Add following line to end of your `.bashrc` file.
 
-```
+~~~
 # This configuration uses CUDA's symbolic link
 export PATH=$PATH:/usr/local/cuda/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64 #if 64bit machine
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
 export CUDA_ROOT=/usr/local/cuda
-```
+~~~
+
+#### Install cuDNN
+
+Download cuDNN from [here](https://developer.nvidia.com/cuDNN). You need to register a membership if you want to request a copy. The evaluation will take a while. At this time, the latest version of this library is cuDNN v2
+
+Extract cuDNN
+
+~~~
+$ tar zxvf cudnn-6.5-linux-x64-v2.tgz
+~~~
+
+Copy extracted files to CUDA folder
+
+~~~
+$ sudo cp cudnn.h /usr/local/cuda-6.5/include
+$ sudo cp libcudnn* /usr/local/cuda-6.5/lib64
+~~~
 
 ### Theano support
 
 Create Theano's configuration file:
 
-```
+~~~
 $ touch $HOME/.theanorc
-```
+~~~
+
 and modify it as
 
-```
+~~~
 [global]
 floatX = float32
 device = gpu0
@@ -182,7 +211,7 @@ fastmath = True
 
 [cuda]
 root = /usr/local/cuda
-```
+~~~
 
 You can use [this test](http://deeplearning.net/software/theano/tutorial/using_gpu.html#testing-theano-with-gpu) to valid your installation.
 
@@ -190,22 +219,7 @@ You can use [this test](http://deeplearning.net/software/theano/tutorial/using_g
 
 Caffe recently supports Nvidia's new machine learning library --- cuDNN. It improves Caffe's performance. Note that cuDNN requires that the graphic card has at least 3.0 of compute capability. Graphic card of this instance is 3.0.
 
-Download cuDNN from:
 
-```
-$ wget http://arl.fsktm.um.edu.my/cudnn-6.5-linux-R1.tgz
-```
-Extract cuDNN
-
-```
-$ tar zxvf cudnn-6.5-linux-R1.tgz
-```
-Copy extracted files to CUDA folder
-
-```
-$ sudo cp cudnn.h /usr/local/cuda-6.5/include
-$ sudo cp libcudnn* /usr/local/cuda-6.5/lib64
-```
 
 Clone Caffe from GitHub
 

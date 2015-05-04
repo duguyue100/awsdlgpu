@@ -128,12 +128,6 @@ You need to download the driver for Grid K520 firstly from [here](http://www.nvi
 $ wget http://us.download.nvidia.com/XFree86/Linux-x86_64/346.59/NVIDIA-Linux-x86_64-346.59.run
 ~~~
 
-Try to install the driver now by
-
-~~~
-$ sudo bash NVIDIA-Linux-x86_64-346.59.run
-~~~
-
 You will not be able to install it because `nouveau` of the system is still on. The installer will add a blacklist to `nouveau` and quit. After the installer quited, you need to update your system by:
 
 ~~~
@@ -145,7 +139,7 @@ __Reboot your instance by stopping and starting it.__
 Then you can simply install the driver by:
 
 ~~~
-$ sudo bash NVIDIA-Linux-x86_64-340.65.run
+$ sudo bash NVIDIA-Linux-x86_64-346.59.run
 ~~~
 
 #### Install CUDA Toolkit

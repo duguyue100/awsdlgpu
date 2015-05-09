@@ -220,22 +220,20 @@ You can use [this test](http://deeplearning.net/software/theano/tutorial/using_g
 
 Caffe recently supports Nvidia's new machine learning library --- cuDNN. It improves Caffe's performance. Note that cuDNN requires that the graphic card has at least 3.0 of compute capability. Graphic card of this instance is 3.0.
 
-
-
 Clone Caffe from GitHub
 
-```
+~~~
 $ cd ~
 $ git clone https://github.com/BVLC/caffe
-```
+~~~
 
 There are several libraries needed for Caffe's Python support, we can install them by:
 
-```
+~~~
 $ pip install leveldb
 $ pip install protobuf
 $ pip install python-gflags
-```
+~~~
 
 After you installed Python dependencies, we can start to modify Caffe's `make` configurations.
 
@@ -246,30 +244,53 @@ After you installed Python dependencies, we can start to modify Caffe's `make` c
 
 Some Anaconda release has bad `libm` library, we need to force the compiler to choose the one from system:
 
-```
+~~~
 $ cd ~/anaconda/lib
 $ mv libm.so.6 libm.so.6.tmp
 $ mv lib.so lib.so.tmp
-```
+~~~
 
 Your final `.bashrc` should look like this
 
-```
+~~~
 # added by Anaconda 2.1.0 installer
 export PATH="/home/ubuntu/anaconda/bin:$PATH"
 export PATH=$PATH:/usr/local/cuda/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/home/ubuntu/anaconda/lib:/usr/local/lib:/usr/lib
 export CUDA_ROOT=/usr/local/cuda
 export CAFFE_ROOT=/home/ubuntu/caffe
-```
+~~~
 
 Build Caffe
 
-```
+~~~
 $ make all -j8
 $ make test
 $ make runtest
-```
+~~~
+
+You might run into one problem when you compile:
+
+~~~
+src/caffe/util/math_functions.cu(140): error: calling a __host__ function("std::signbit<float> ") from a __global__ function("caffe::sgnbit_kernel<float> ") is not allowed
+src/caffe/util/math_functions.cu(140): error: calling a __host__ function("std::signbit<double> ") from a __global__ function("caffe::sgnbit_kernel<double> ") is not allowed
+2 errors detected in the compilation of "/tmp/tmpxft_00003c94_00000000-12_math_functions.compute_35.cpp1.ii".
+make: *** [build/src/caffe/util/math_functions.cuo] Error 2
+~~~
+
+You can change `caffe/include/caffe/util/math_functions.hpp`, try change
+
+~~~ cpp
+using std::signbit;
+DEFINE_CAFFE_CPU_UNARY_FUNC(sgnbit, y[i] = signbit(x[i]));
+~~~
+
+to
+
+~~~ cpp
+// using std::signbit;
+DEFINE_CAFFE_CPU_UNARY_FUNC(sgnbit, y[i] = std::signbit(x[i]));
+~~~
 
 You should have 2 Disabled tests, the reason is from OpenCV part.
 

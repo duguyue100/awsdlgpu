@@ -50,7 +50,7 @@ $ sudo apt-get install git cmake
 Theano and Caffe are two popular deep learning framework. In this instance, we are going to support them. You need to install following packages:
 
 ~~~
-$ sudo apt-get install libopenblas-dev libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libboost-all-dev libhdf5-serial-dev libgflags-dev libgoogle-glog-dev liblmdb-dev protobuf-compiler
+$ sudo apt-get install libopenblas-dev libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libboost-all-dev libhdf5-serial-dev libgflags-dev libgoogle-glog-dev liblmdb-dev protobuf-compiler libtiff4-dev
 ~~~
 
 Your BLAS in this case is openBLAS.

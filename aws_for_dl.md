@@ -298,10 +298,14 @@ You should have 2 Disabled tests, the reason is from OpenCV part.
 
 I made two ready-to-use AMIs so that you don't have to be so painful for these technical details.
 
-I made this AMI public so that you can use it to launch a new instance or make a spot request.
+I made this AMI public so that you can use it to launch a new instance or make a spot request (Asia Singapore).
 
 + __DGYDLGPUv4__ (ami-ba516ee8) [Based on g2.2xlarge]
 + __DGYDLGPUXv1__ (ami-52516e00) [Based on g2.8xlarge]
+
+If you are primarily using Caffe, now you can use an AMI that is built by Caffe in US East (N. Virginia):
+
++ __Caffe/CuDNN built 2015-05-04__ (ami-763a331e) [For both g2.2xlarge and g2.8xlarge]
 
 ## Contacts
 

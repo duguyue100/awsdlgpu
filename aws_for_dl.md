@@ -33,7 +33,7 @@ sudo apt-get install linux-headers-generic linux-headers-virtual linux-image-vir
 sudo apt-get install linux-image-extra-virtual
 ~~~
 
-__Reboot your instance by stopping and starting it.__
+__Reboot your instance by rebooting it.__
 
 Then, you need to install `build-essential` to enable your development support:
 
@@ -61,7 +61,7 @@ You may also need Java support for some cases:
 sudo apt-get install openjdk-7-jdk
 ~~~
 
-__Reboot your instance by stopping and starting it.__
+__Reboot your instance by rebooting it.__
 
 ### Scientific Python Support from Anaconda
 
@@ -101,7 +101,13 @@ export PATH="/home/ubuntu/anaconda/bin:$PATH"
 Press `Ctrl+X` to save and exit, then you need to source the file to enable current setting:
 
 ~~~
-$ source ~/.bashrc
+source ~/.bashrc
+~~~
+
+Update all packages in Anaconda
+
+~~~
+conda update --all
 ~~~
 
 ### GPU Driver and CUDA Support
@@ -111,7 +117,7 @@ $ source ~/.bashrc
 Check your instance's graphic card by:
 
 ~~~
-$ lspci | grep -i nvidia
+lspci | grep -i nvidia
 ~~~
 
 It should give you something similar to this:
@@ -125,20 +131,20 @@ Nvidia Grid K520 is a Cloud Gaming Graphic Card, it got 2 GK104 GPUs where each 
 You need to download the driver for Grid K520 firstly from [here](http://www.nvidia.com/Download/index.aspx?lang=en-us). You also can use this address to download:
 
 ~~~
-$ wget http://us.download.nvidia.com/XFree86/Linux-x86_64/346.59/NVIDIA-Linux-x86_64-346.59.run
+wget http://us.download.nvidia.com/XFree86/Linux-x86_64/346.59/NVIDIA-Linux-x86_64-346.59.run
 ~~~
 
 You will not be able to install it because `nouveau` of the system is still on. The installer will add a blacklist to `nouveau` and quit. After the installer quited, you need to update your system by:
 
 ~~~
-$ cd /etc/modprobe.d/
-$ sudo nano blacklist.conf
+cd /etc/modprobe.d/
+sudo nano blacklist.conf
 ~~~
 
 Add `blacklist nouveau` at the end of `blacklist.conf`.
 
 ~~~
-$ sudo update-initramfs -u
+sudo update-initramfs -u
 ~~~
 
 __Reboot your instance by stopping and starting it.__
@@ -146,7 +152,7 @@ __Reboot your instance by stopping and starting it.__
 Then you can simply install the driver by:
 
 ~~~
-$ sudo bash NVIDIA-Linux-x86_64-346.59.run
+sudo bash NVIDIA-Linux-x86_64-346.59.run
 ~~~
 
 #### Install CUDA Toolkit
@@ -154,14 +160,14 @@ $ sudo bash NVIDIA-Linux-x86_64-346.59.run
 You need to get recent CUDA Toolkit in order to use your GPU:
 
 ~~~
-$ wget http://developer.download.nvidia.com/compute/cuda/7_0/Prod/local_installers/cuda_7.0.28_linux.run
+wget http://developer.download.nvidia.com/compute/cuda/7_0/Prod/local_installers/cuda_7.0.28_linux.run
 ~~~
 
 This will take a while, you may want to grab a coffee.
 
 And install CUDA by:
 ~~~
-$ sudo bash cuda_7.0.28_linux64.run
+sudo bash cuda_7.0.28_linux64.run
 ~~~
 
 **DO NOT INSTALL GPU DRIVER INSIDE THE CUDA TOOLKIT**
@@ -182,14 +188,14 @@ Download cuDNN from [here](https://developer.nvidia.com/cuDNN). You need to regi
 Extract cuDNN
 
 ~~~
-$ tar zxvf cudnn-6.5-linux-x64-v2.tgz
+tar zxvf cudnn-6.5-linux-x64-v2.tgz
 ~~~
 
 Copy extracted files to CUDA folder
 
 ~~~
-$ sudo cp cudnn.h /usr/local/cuda-7.0/include
-$ sudo cp libcudnn* /usr/local/cuda-7.0/lib64
+sudo cp cudnn.h /usr/local/cuda-7.0/include
+sudo cp libcudnn* /usr/local/cuda-7.0/lib64
 ~~~
 
 ### Theano support
@@ -197,7 +203,7 @@ $ sudo cp libcudnn* /usr/local/cuda-7.0/lib64
 Create Theano's configuration file:
 
 ~~~
-$ touch $HOME/.theanorc
+touch $HOME/.theanorc
 ~~~
 
 and modify it as
@@ -223,16 +229,16 @@ Caffe recently supports Nvidia's new machine learning library --- cuDNN. It impr
 Clone Caffe from GitHub
 
 ~~~
-$ cd ~
-$ git clone https://github.com/BVLC/caffe
+cd ~
+git clone https://github.com/BVLC/caffe
 ~~~
 
 There are several libraries needed for Caffe's Python support, we can install them by:
 
 ~~~
-$ pip install leveldb
-$ pip install protobuf
-$ pip install python-gflags
+pip install leveldb
+pip install protobuf
+pip install python-gflags
 ~~~
 
 After you installed Python dependencies, we can start to modify Caffe's `make` configurations.

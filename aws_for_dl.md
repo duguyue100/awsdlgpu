@@ -21,16 +21,16 @@ You got a brand new Ubuntu machine after your instance is running successfully.
 Home folder of the instance is empty, for further usage, we can create a `Downloads` folder to store all downloads
 
 ~~~
-$ mkdir Downloads
+mkdir Downloads
 ~~~
 
 Firstly, you need to update your update library by:
 
 ~~~
-$ sudo apt-get update
-$ sudo apt-get upgrade
-$ sudo apt-get install linux-headers-generic linux-headers-virtual linux-image-virtual linux-virtual
-$ sudo apt-get install linux-image-extra-virtual
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install linux-headers-generic linux-headers-virtual linux-image-virtual linux-virtual
+sudo apt-get install linux-image-extra-virtual
 ~~~
 
 __Reboot your instance by stopping and starting it.__
@@ -38,19 +38,19 @@ __Reboot your instance by stopping and starting it.__
 Then, you need to install `build-essential` to enable your development support:
 
 ~~~
-$ sudo apt-get install build-essential binutils
+sudo apt-get install build-essential binutils
 ~~~
 
 Some supporting libraries needed for getting and building your project later:
 
 ~~~
-$ sudo apt-get install git cmake
+sudo apt-get install git cmake
 ~~~
 
 Theano and Caffe are two popular deep learning framework. In this instance, we are going to support them. You need to install following packages:
 
 ~~~
-$ sudo apt-get install libopenblas-dev libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libboost-all-dev libhdf5-serial-dev libgflags-dev libgoogle-glog-dev liblmdb-dev protobuf-compiler libtiff4-dev
+sudo apt-get install libopenblas-dev libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libboost-all-dev libhdf5-serial-dev libgflags-dev libgoogle-glog-dev liblmdb-dev protobuf-compiler libtiff4-dev
 ~~~
 
 Your BLAS in this case is openBLAS.
@@ -58,7 +58,7 @@ Your BLAS in this case is openBLAS.
 You may also need Java support for some cases:
 
 ~~~
-$ sudo apt-get install openjdk-7-jdk
+sudo apt-get install openjdk-7-jdk
 ~~~
 
 __Reboot your instance by stopping and starting it.__
@@ -70,14 +70,14 @@ Anaconda is an awesome Python distribution for large-scale data processing, pred
 First, get Anaconda (use Anaconda Python 2.7) (Note that as I'm writing, latest Anaconda is 2.2.0, you can download the latest version from [here](http://continuum.io/downloads) also):
 
 ~~~
-$ cd Downloads
-$ wget https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda-2.2.0-Linux-x86_64.sh
+cd Downloads
+wget https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda-2.2.0-Linux-x86_64.sh
 ~~~
 
 After download, you simply run the bash file:
 
 ~~~
-$ bash ./Anaconda-2.2.0-Linux-x86_64.sh
+bash ./Anaconda-2.2.0-Linux-x86_64.sh
 ~~~
 
 Follow the default instruction, you should be able to find a new folder: `anaconda` in your home folder. Now if you check you Python's version, it should give you:
@@ -89,7 +89,7 @@ Python 2.7.9 :: Anaconda 2.2.0 (64-bit)
 Otherwise, you need to add Anaconda's path to your `.bashrc`
 
 ~~~
-$ nano ~/.bashrc
+nano ~/.bashrc
 ~~~
 
 Add following line to the end of the file

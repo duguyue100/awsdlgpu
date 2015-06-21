@@ -167,7 +167,7 @@ This will take a while, you may want to grab a coffee.
 
 And install CUDA by:
 ~~~
-sudo bash cuda_7.0.28_linux64.run
+sudo bash cuda_7.0.28_linux.run
 ~~~
 
 **DO NOT INSTALL GPU DRIVER INSIDE THE CUDA TOOLKIT**
@@ -251,9 +251,9 @@ After you installed Python dependencies, we can start to modify Caffe's `make` c
 Some Anaconda release has bad `libm` library, we need to force the compiler to choose the one from system:
 
 ~~~
-$ cd ~/anaconda/lib
-$ mv libm.so.6 libm.so.6.tmp
-$ mv lib.so lib.so.tmp
+cd ~/anaconda/lib
+mv libm.so.6 libm.so.6.tmp
+mv lib.so lib.so.tmp
 ~~~
 
 Your final `.bashrc` should look like this
@@ -270,9 +270,9 @@ export CAFFE_ROOT=/home/ubuntu/caffe
 Build Caffe
 
 ~~~
-$ make all -j8
-$ make test
-$ make runtest
+make all -j8
+make test
+make runtest
 ~~~
 
 You might run into one problem when you compile:

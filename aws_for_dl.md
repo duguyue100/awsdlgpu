@@ -152,7 +152,7 @@ __Reboot your instance by stopping and starting it.__
 Then you can simply install the driver by:
 
 ~~~
-sudo bash NVIDIA-Linux-x86_64-346.59.run
+sudo bash NVIDIA-Linux-x86_64-352.21.run
 ~~~
 
 #### Install CUDA Toolkit

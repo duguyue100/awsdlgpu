@@ -2,6 +2,8 @@
 
 __Last updated: 2015-05-04__
 
+__This script is not in active development anymore. (2016-07-21)__
+
 ## From scratch
 
 ### Create EC2 GPU Instance
@@ -147,7 +149,7 @@ Add `blacklist nouveau` at the end of `blacklist.conf`.
 sudo update-initramfs -u
 ~~~
 
-__Reboot your instance by stopping and starting it.__
+__Restart your instance by rebooting it.__
 
 Then you can simply install the driver by:
 

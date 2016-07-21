@@ -30,7 +30,7 @@ Firstly, you need to update your update library by:
 
 ~~~
 sudo apt-get update
-sudo apt-get upgrade
+sudo apt-get dist-upgrade
 sudo apt-get install linux-headers-generic linux-headers-virtual linux-image-virtual linux-virtual
 sudo apt-get install linux-image-extra-virtual
 ~~~
